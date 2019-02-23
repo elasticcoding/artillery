@@ -1,0 +1,35 @@
+{
+"config"   : {
+"target" : "http://csrtrack.openclouds.in:5555",
+"phases" : [
+  { "duration": 1000, "arrivaRate": 1}
+],
+
+"payload": {
+
+  "path"  : "LoginReq1.csv",
+  "fields": [ "username","password"],
+  "order": "sequence"
+
+ }
+},
+
+ "scenarios": [
+{
+  "name": "User login",
+  "flow": 
+    {
+      "post": {
+        "url" : "/login",
+        "json"   : {
+          "username": "{{ username }}",
+          "password": "{{ password }}"
+        },
+
+        "capture": {
+          "json": "$user.id",
+          "token"  : "token"
+        }
+      }
+    }
+  }]}
